@@ -1,0 +1,6 @@
+accelerate==0.27.0
+diffusers==0.26.3
+einops==0.7.0
+insightface==0.7.3
+ip_adapter @ git+https://github.com/tencent-ailab/IP-Adapter@main
+onnxruntime==1.17.1

@@ -1,0 +1,9 @@
+proj:
+  proj_name: persona-genie
+  region_name: us-east-1
+  iam_profile_name:
+  s3_bucket_name:
+  sm_instance_type: ml.g4dn.2xlarge
+
+model:
+  use_shortcut: False
