@@ -4,7 +4,7 @@
 ![AI Avatar](./assets/avatar.png)  
 ![Demo](https://github.com/aldente0630/persona-genie/assets/10204855/1ba5b405-6b19-4d0b-bbca-81eb936fd429)
 
-This application leverages the [IP-Adapter](https://arxiv.org/abs/2308.06721) model for AI avatar photo generation, developed with AWS services and [Gradio](https://www.gradio.app/) for an interactive interface. It utilizes the [AWS Cloud Development Kit]((https://aws.amazon.com/cdk/)) for quick infrastructure provisioning, making the setup process straightforward for demonstration purposes.
+This application leverages the [IP-Adapter](https://arxiv.org/abs/2308.06721) model for AI avatar photo generation, developed with AWS services and [Gradio](https://www.gradio.app/) for an interactive interface. It utilizes the [AWS Cloud Development Kit](https://aws.amazon.com/cdk/) for quick infrastructure provisioning, making the setup process straightforward for demonstration purposes.
 
 ## 🛠 Usage Instructions
 - - -
