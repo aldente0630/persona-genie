@@ -4,7 +4,7 @@
 ![AI Avatar](./assets/avatar.png)  
 ![Demo](https://github.com/aldente0630/persona-genie/assets/10204855/1ba5b405-6b19-4d0b-bbca-81eb936fd429)
 
-This application leverages the [IP-Adapter](https://arxiv.org/abs/2308.06721) model for AI avatar photo generation, developed with AWS services and [Gradio](https://www.gradio.app/) for an interactive interface. It utilizes the [AWS Cloud Development Kit (AWS CDK)]((https://aws.amazon.com/cdk/)) for quick infrastructure provisioning, making the setup process straightforward for demonstration purposes.
+This application leverages the [IP-Adapter](https://arxiv.org/abs/2308.06721) model for AI avatar photo generation, developed with AWS services and [Gradio](https://www.gradio.app/) for an interactive interface. It utilizes the [AWS Cloud Development Kit]((https://aws.amazon.com/cdk/)) for quick infrastructure provisioning, making the setup process straightforward for demonstration purposes.
 
 ## 🛠 Usage Instructions
 - - -
@@ -12,7 +12,7 @@ This application leverages the [IP-Adapter](https://arxiv.org/abs/2308.06721) mo
 
 - **Python Installation:** Ensure Python is installed in your environment.
 - **AWS Configuration:** Set up your AWS credentials and configuration prior to deployment. This includes having access to an AWS account and the AWS CLI configured on your machine.
-- **S3 Bucket Preparation:** If you do not already have an S3 bucket, create one. Update the `s3_bucket_name` in the `config/config.yaml` file with your bucket's name. Make sure the bucket is in the same region as specified in your config file.
+- **S3 Bucket Preparation:** If you do not already have an S3 bucket, create one. Update the `s3_bucket_name` in the `configs/config.yaml` file with your bucket's name. Make sure the bucket is in the same region as specified in your config file.
 
 ### Step 2: Install Required Packages
 
