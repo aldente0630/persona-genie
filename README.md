@@ -25,7 +25,7 @@ This application leverages the [IP-Adapter](https://arxiv.org/abs/2308.06721) mo
 ### Step 3: Provision Infrastructure
 
 1. **Model Preparation:**
-   - Download your model file to the HuggingFace repository and upload it to your S3 bucket using `python scripts/upload_model.py`.
+   - Download the model file to the HuggingFace repository and upload it to your S3 bucket using `python scripts/upload_model.py`.
 
 2. **Deploy with CDK:**
    - Utilize the CDK to deploy SageMaker models, endpoints, Lambda functions, API Gateway, and more with `cdk deploy`.
