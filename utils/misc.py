@@ -56,10 +56,6 @@ def get_default(value: Optional[Any], default: Any) -> Any:
     return default if value is None else value
 
 
-def get_dir_path(dir_name: str) -> str:
-    return os.path.abspath(os.path.join(os.path.dirname(__file__), dir_name))
-
-
 def log_or_print(msg: str, logger: Optional[logging.Logger] = None) -> None:
     if logger:
         logger.info(msg)

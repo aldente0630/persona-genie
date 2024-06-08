@@ -9,13 +9,17 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), os.pardi
 from utils.config_handler import load_config
 from utils.enums import CkptName, DirName, FileName, Url
 from utils.logger import logger
-from utils.misc import compress_dir_to_model_tar_gz, get_dir_path
+from utils.misc import compress_dir_to_model_tar_gz
+
+
+def get_dir_path(dir_name: str) -> str:
+    return os.path.abspath(os.path.join(os.path.dirname(__file__), dir_name))
 
 
 if __name__ == "__main__":
     os.chdir(os.path.dirname(__file__))
-    config_dir = get_dir_path(os.path.join(os.pardir, DirName.CONFIGS.value))
-    config = load_config(os.path.join(config_dir, FileName.CONFIG.value))
+    config_dir = get_dir_path(os.path.join(os.pardir, DirName.CONFIGS))
+    config = load_config(os.path.join(config_dir, FileName.CONFIG))
 
     # Download the model checkpoint from the HuggingFace repository
     CKPT_NAME = (
@@ -27,7 +31,7 @@ if __name__ == "__main__":
         f"https://{Url.HF_IP_ADAPTER_FACEID.value}/{CKPT_NAME}?download=true"
     )
 
-    models_dir = os.path.join(os.pardir, DirName.MODELS.value)
+    models_dir = os.path.join(os.pardir, DirName.MODELS)
     os.makedirs(models_dir, exist_ok=True)
     models_path = os.path.join(models_dir, CKPT_NAME)
     status_code = response.status_code
@@ -48,8 +52,7 @@ if __name__ == "__main__":
 
     shutil.copyfile(models_path, os.path.join(source_dir, CKPT_NAME))
     shutil.copytree(
-        os.path.join(os.pardir, DirName.CODE.value, DirName.SAGEMAKER.value)
-        + os.path.sep,
+        os.path.join(os.pardir, DirName.CODE, DirName.SAGEMAKER) + os.path.sep,
         os.path.join(source_dir, "code"),
     )
 

@@ -12,7 +12,7 @@ This application leverages the [IP-Adapter](https://arxiv.org/abs/2308.06721) mo
 
 - **Python Installation:** Ensure Python is installed in your environment.
 - **AWS Configuration:** Set up your AWS credentials and configuration prior to deployment. This includes having access to an AWS account and the AWS CLI configured on your machine.
-- **S3 Bucket Preparation:** If you do not already have an S3 bucket, create one. Update the `s3_bucket_name` in the `configs/config.yaml` file with your bucket's name. Make sure the bucket is in the same region as specified in your config file.
+- **A Configuration File Creation:** Create a file named `configs/config.yaml` based on the `configs/config-template.yaml` file, and make sure to specify the `s3_bucket_name`. 
 
 ### Step 2: Install Required Packages
 

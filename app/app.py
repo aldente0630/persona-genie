@@ -13,7 +13,7 @@ from utils.aws_utils import get_ssm_parameter
 from utils.config_handler import load_config
 from utils.enums import DirName, FileName, Url
 from utils.logger import logger
-from utils.misc import decode_base64_image, get_default, get_dir_path
+from utils.misc import decode_base64_image, get_default
 
 NEGATIVE_PROMPT: Final = """
 cleavage, nipples, nsfw, nude, uncensored, bad anatomy, bad proportions, bad quality, blurry, collage, cropped, 
@@ -38,7 +38,7 @@ class App:
         boto_session = boto3.Session(
             region_name=self.region_name, profile_name=self.profile_name
         )
-        self.url = get_ssm_parameter(boto_session, f"/{self.proj_name}/url")
+        self.url = get_ssm_parameter(boto_session, f"/{self.proj_name}/apigw-url")
 
     def invoke(
         self,
@@ -83,9 +83,13 @@ class App:
             logger.error("Received invalid inputs.")
 
 
+def get_dir_path(dir_name: str) -> str:
+    return os.path.abspath(os.path.join(os.path.dirname(__file__), dir_name))
+
+
 if __name__ == "__main__":
-    config_dir = get_dir_path(os.path.join(os.pardir, DirName.CONFIGS.value))
-    config = load_config(os.path.join(config_dir, FileName.CONFIG.value))
+    config_dir = get_dir_path(os.path.join(os.pardir, DirName.CONFIGS))
+    config = load_config(os.path.join(config_dir, FileName.CONFIG))
 
     app = App(
         region_name=config.region_name,

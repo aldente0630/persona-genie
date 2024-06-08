@@ -14,7 +14,6 @@ from constructs import Construct
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), os.pardir)))
 from utils.config_handler import load_config
 from utils.enums import DirName, FileName, Url
-from utils.misc import get_dir_path
 
 
 class ImageGenModelStack(core.Stack):
@@ -84,7 +83,7 @@ class ImageGenModelStack(core.Stack):
                     "variantName": "AllTraffic",
                 }
             ],
-            endpoint_config_name=f"{proj_name}-endpoint",
+            endpoint_config_name=f"{proj_name}-endpoint-config",
         )
 
         _ = sagemaker.CfnEndpoint(
@@ -112,7 +111,7 @@ class ImageGenModelStack(core.Stack):
         # Create an API Gateway to expose the Lambda Function
         rest_api = api_gateway.LambdaRestApi(
             self,
-            "ApiGateway-ImageGen-RestApi",
+            "ApiGw-ImageGen-RestApi",
             handler=function,
             proxy=False,
             rest_api_name=f"{proj_name}-rest-api",
@@ -124,10 +123,14 @@ class ImageGenModelStack(core.Stack):
         # Store the URL of the API gateway in SSM Parameter Store
         ssm.StringParameter(
             self,
-            "Ssm-ImageGen-Parameter",
-            parameter_name=f"/{proj_name}/url",
+            "Ssm-ImageGen-ApiGw-Url-Parameter",
+            parameter_name=f"/{proj_name}/apigw-url",
             string_value=rest_api.url,
         )
+
+
+def get_dir_path(dir_name: str) -> str:
+    return os.path.abspath(os.path.join(os.path.dirname(__file__), dir_name))
 
 
 def get_hf_infer_container_url(
@@ -149,8 +152,8 @@ def get_hf_infer_container_url(
 
 
 if __name__ == "__main__":
-    config_dir = get_dir_path(os.path.join(os.pardir, DirName.CONFIGS.value))
-    config = load_config(os.path.join(config_dir, FileName.CONFIG.value))
+    config_dir = get_dir_path(os.path.join(os.pardir, DirName.CONFIGS))
+    config = load_config(os.path.join(config_dir, FileName.CONFIG))
     model_data_url = f"s3://{config.bucket_name}/{config.proj_name}/model.tar.gz"
 
     app = core.App()
@@ -163,4 +166,5 @@ if __name__ == "__main__":
         use_shortcut=config.use_shortcut,
         env=core.Environment(region=config.region_name),
     )
+
     app.synth()

@@ -208,3 +208,4 @@ cdk.out/
 flagged/
 logs/
 models/
+config.yaml

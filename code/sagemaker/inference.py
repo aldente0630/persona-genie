@@ -45,28 +45,28 @@ def model_fn(model_dir: str) -> Dict[str, Any]:
         set_alpha_to_one=False,
         steps_offset=1,
     )
-    vae = AutoencoderKL.from_pretrained(HfModelId.SD_VAE.value).to(dtype=torch.float16)
+    vae = AutoencoderKL.from_pretrained(HfModelId.SD_VAE).to(dtype=torch.float16)
     pipe = StableDiffusionPipeline.from_pretrained(
-        HfModelId.SD_V1_5.value,
+        HfModelId.SD_V1_5,
         scheduler=scheduler,
         vae=vae,
         torch_dtype=torch.float16,
         feature_extractor=CLIPFeatureExtractor.from_pretrained(
-            HfModelId.CLIP_VIT_BASE_PATCH32.value,
+            HfModelId.CLIP_VIT_BASE_PATCH32,
         ),
         safety_checker=StableDiffusionSafetyChecker.from_pretrained(
-            HfModelId.SD_SAFETY_CHECKER.value,
+            HfModelId.SD_SAFETY_CHECKER,
         ),
     ).to(device)
 
     model = IPAdapterFaceIDPlus(
         pipe,
-        HfModelId.IMAGE_ENCODER.value,
+        HfModelId.IMAGE_ENCODER,
         os.path.join(
             model_dir,
-            CkptName.IP_ADAPTER_FACEID_PLUS_V2.value
+            CkptName.IP_ADAPTER_FACEID_PLUS_V2
             if use_shortcut
-            else CkptName.IP_ADAPTER_FACEID_PLUS_V1.value,
+            else CkptName.IP_ADAPTER_FACEID_PLUS_V1,
         ),
         device,
     )
